@@ -10,7 +10,7 @@ class SetDirectoryMTimeTask extends SetBasedTask
 {
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * The number of sub-directories found.
+   * The number of subdirectories found.
    *
    * @var int
    */
@@ -24,12 +24,13 @@ class SetDirectoryMTimeTask extends SetBasedTask
   private string $workDirName;
 
   //--------------------------------------------------------------------------------------------------------------------
+
   /**
    * Main method of this task.
    */
   public function main()
   {
-    $this->logInfo("Setting mtime recursively under directory %s", $this->workDirName);
+    $this->logInfo('Setting mtime recursively under directory %s', $this->workDirName);
 
     $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($this->workDirName,
                                                                                \FilesystemIterator::SKIP_DOTS),
@@ -42,11 +43,11 @@ class SetDirectoryMTimeTask extends SetBasedTask
         $mtime = $this->getMaxMTime($path);
         if ($mtime!==null)
         {
-          $this->logVerbose("Set mtime of %s to %s", $path, date('Y-m-d H:i:s', $mtime));
+          $this->logVerbose('Set mtime of %s to %s', $path, date('Y-m-d H:i:s', $mtime));
           $success = touch($path, $mtime);
           if (!$success)
           {
-            $this->logError("Unable to set mtime of %s", $path);
+            $this->logError('Unable to set mtime of %s', $path);
           }
 
           $this->count++;
@@ -54,7 +55,7 @@ class SetDirectoryMTimeTask extends SetBasedTask
       }
     }
 
-    $this->logInfo("Found %d sub-directories", $this->count);
+    $this->logInfo('Found %d subdirectories', $this->count);
   }
 
   //--------------------------------------------------------------------------------------------------------------------

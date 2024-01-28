@@ -71,16 +71,9 @@ class ReadSemanticVersionTask extends SetBasedTask
    */
   public function main(): void
   {
-    // Read current version form file.
     $this->readPreviousVersionNumber();
-
-    // Set new version from CLI.
     $this->setNewVersionNumber();
-
-    // Update version in file.
     $this->updateVersionInFile();
-
-    // Set version properties for project.
     $this->setProjectVersionProperties();
   }
 
@@ -176,39 +169,39 @@ class ReadSemanticVersionTask extends SetBasedTask
         $content = file_get_contents($this->filename);
         if ($content===false)
         {
-          $this->logError("Not readable file %s.", $this->filename);
+          $this->logError('Not readable file %s.', $this->filename);
         }
 
-        if ($content)
+        if ($content!=='')
         {
           $previousVersion = $this->validateSemanticVersion($content);
-          if ($previousVersion)
+          if (isset($previousVersion['version']))
           {
-            $this->logInfo("Current version is %s", $previousVersion['version']);
+            $this->logInfo('Current version is %s', $previousVersion['version']);
           }
           else
           {
-            $this->logError("Version is %s is not a valid Semantic Version", $previousVersion['version']);
+            $this->logError('Version is %s is not a valid Semantic Version', $content);
           }
         }
       }
       else
       {
-        $this->logInfo("File %s does not exist", $this->filename);
+        $this->logInfo('File %s does not exist', $this->filename);
       }
     }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
   /**
-   * Read new version number from php://stdin stream i.e CLI.
+   * Read new version number from php://stdin stream i.e. CLI.
    */
   private function setNewVersionNumber(): void
   {
     $valid = false;
     while (!$valid)
     {
-      echo "Enter new Semantic Version: ";
+      echo 'Enter new Semantic Version: ';
 
       $line             = fgets(STDIN);
       $this->newVersion = $this->validateSemanticVersion($line);
@@ -216,7 +209,7 @@ class ReadSemanticVersionTask extends SetBasedTask
 
       if (!$valid)
       {
-        $this->logInfo("%s is not a valid Semantic Version", trim($line, "\n"));
+        $this->logInfo('%s is not a valid Semantic Version', trim($line, "\n"));
       }
     }
   }
@@ -266,7 +259,7 @@ class ReadSemanticVersionTask extends SetBasedTask
       $status = file_put_contents($this->filename, $this->newVersion['version']);
       if (!$status)
       {
-        $this->logError("File %s is not writable", $this->filename);
+        $this->logError('File %s is not writable', $this->filename);
       }
     }
   }

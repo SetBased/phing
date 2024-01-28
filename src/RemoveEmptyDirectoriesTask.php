@@ -38,7 +38,7 @@ class RemoveEmptyDirectoriesTask extends SetBasedTask
    */
   public function main()
   {
-    $this->logInfo("Removing empty directories under %s", $this->workDirName);
+    $this->logInfo('Removing empty directories under %s', $this->workDirName);
 
     $empty = $this->removeEmptyDirs($this->workDirName);
     if ($empty && $this->removeParent)
@@ -46,7 +46,7 @@ class RemoveEmptyDirectoriesTask extends SetBasedTask
       $this->removeDir($this->workDirName);
     }
 
-    $this->logInfo("Removed %d empty directories", $this->count);
+    $this->logInfo('Removed %d empty directories', $this->count);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -79,10 +79,10 @@ class RemoveEmptyDirectoriesTask extends SetBasedTask
    */
   private function removeDir(string $dir): void
   {
-    $this->logVerbose("Removing %s", $dir);
+    $this->logVerbose('Removing %s', $dir);
 
     $suc = rmdir($dir);
-    if ($suc===false) $this->logError("Unable to remove directory %s", $dir);
+    if ($suc===false) $this->logError('Unable to remove directory %s', $dir);
 
     $this->count++;
   }
@@ -93,14 +93,14 @@ class RemoveEmptyDirectoriesTask extends SetBasedTask
    *
    * @param string $parentDir The parent directory.
    *
-   * @return bool True if the parent directory is empty. Otherwise false.
+   * @return bool True if the parent directory is empty. Otherwise, false.
    *
    * @throws BuildException
    */
   private function removeEmptyDirs(string $parentDir): bool
   {
     $entries = scandir($parentDir, SCANDIR_SORT_ASCENDING);
-    if ($entries===false) $this->logError("Unable to scan directory %s", $parentDir);
+    if ($entries===false) $this->logError('Unable to scan directory %s', $parentDir);
 
     foreach ($entries as $i => $entry)
     {
