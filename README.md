@@ -1,4 +1,6 @@
 # Phing Extensions
+
+[![Join the chat at https://gitter.im/SetBased/phing-extensions](https://badges.gitter.im/SetBased/phing-extensions.svg)](https://gitter.im/SetBased/phing-extensions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A set of Phing extensions.
 
 [![Gitter](https://badges.gitter.im/SetBased/phing-extensions.svg)](https://gitter.im/SetBased/phing-extensions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
