@@ -6,11 +6,9 @@
     "Extensions"
   ],
   "license": "MIT",
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "require": {
     "php": ">=8.1",
-    "phing/phing": "^3.0.0-RC4",
+    "phing/phing": "^3.0.0",
     "setbased/helper-program-execution": "^1.2.0"
   },
   "autoload": {
